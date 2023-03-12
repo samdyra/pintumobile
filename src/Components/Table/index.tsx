@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
@@ -22,22 +22,15 @@ interface Props {
 }
 
 const Table: React.FC<Props> = (props: Props) => {
-  let RenderList;
-  if (props.isLoading || props.isError) {
-    RenderList = <PlaceholderShimmer />;
-  }
-  if (props.isError) {
-    alert("Something Went Wrong!")
-  }
-  else {
-    RenderList = (
-      <TokenElement
-        data={props.data}
-        isLoading={props.isLoading}
-        refetch={props.refetch}
-      />
-    );
-  }
+  const RenderList = props.isLoading ? (
+    <PlaceholderShimmer />
+  ) : (
+    <TokenElement
+      data={props.data}
+      isLoading={props.isLoading}
+      refetch={props.refetch}
+    />
+  );
 
   return (
     <View style={styles.container}>
@@ -70,4 +63,4 @@ const PlaceholderShimmer:React.FC = () => {
   );
 };
 
-export default memo(Table);
+export default Table;
