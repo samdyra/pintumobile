@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { View, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
 
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Market</Text>
@@ -15,4 +15,4 @@ const Header:React.FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

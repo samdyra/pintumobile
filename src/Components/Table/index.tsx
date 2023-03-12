@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Text, FlatList, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
@@ -37,6 +37,7 @@ const Table: React.FC<Props> = (props: Props) => {
           const latestPrice = `Rp${groupingFormat(
             parseFloat(item?.latestPrice)
           )}`;
+          const performanceStyle = parseFloat(item?.day) > 0 ? styles.descTokenPerformance : styles.descTokenPerformanceMinus
           return (
             <View style={styles.listContainer}>
               <View style={styles.descTokenContainer}>
@@ -55,7 +56,7 @@ const Table: React.FC<Props> = (props: Props) => {
               </View>
               <View style={styles.priceToken}>
                 <Text style={styles.descTokenPrice}>{latestPrice}</Text>
-                <Text style={styles.descTokenPerformance}>{performance}</Text>
+                <Text style={performanceStyle}>{performance}</Text>
               </View>
             </View>
           );
@@ -65,4 +66,4 @@ const Table: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Table;
+export default memo(Table);

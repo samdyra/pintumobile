@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { styles } from "./styles";
 
@@ -12,4 +12,4 @@ const Layout: React.FC<Props> = (props: Props) => {
   return <View style={styles.container}>{children}</View>;
 };
 
-export default Layout;
+export default memo(Layout);

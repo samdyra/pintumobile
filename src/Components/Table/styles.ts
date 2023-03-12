@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
       width: "50%",
       alignItems: "flex-end",
       justifyContent: "center",
-      gap: 5
+      gap: 8
     },
     image: {
       width: 30,
@@ -67,5 +67,11 @@ export const styles = StyleSheet.create({
     descTokenPerformance: {
       fontSize: 14,
       fontWeight: "600",
+      color: "green"
+    },
+    descTokenPerformanceMinus: {
+      fontSize: 14,
+      fontWeight: "600",
+      color: "red"
     }
   });
