@@ -2,6 +2,9 @@ import React from "react";
 import { Text, FlatList, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
+import { SvgUri } from "react-native-svg";
+import { performanceGetter, groupingFormat } from "../../Helpers/GlobalHelpers";
+
 interface Props {
   data: {
     currencyGroup: string;
@@ -12,28 +15,49 @@ interface Props {
     week: string;
     month: string;
     year: string;
+    color: string;
   }[];
 }
 
 const Table: React.FC<Props> = (props: Props) => {
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Sort By</Text>
-        <View>
-          <Text>Default</Text>
-          <AntDesign name="caretdown" size={24} color="black" />
+      <View style={styles.header}>
+        <Text style={styles.text}>Sort By</Text>
+        <View style={styles.sort}>
+          <Text style={styles.text}>Default</Text>
+          <AntDesign name="down" size={18} color="black" />
         </View>
       </View>
       <FlatList
         data={props.data}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
+          const performance = performanceGetter(item?.day);
+          const latestPrice = `Rp${groupingFormat(
+            parseFloat(item?.latestPrice)
+          )}`;
           return (
-            <React.Fragment>
-              <Text>{item?.name}</Text>
-              <Text>{item?.currencyGroup}</Text>
-            </React.Fragment>
+            <View style={styles.listContainer}>
+              <View style={styles.descTokenContainer}>
+                <SvgUri
+                  width="38"
+                  height="38"
+                  uri={item?.logo}
+                  color={item?.color}
+                />
+                <View style={styles.descToken}>
+                  <Text style={styles.descTokenTextName}>{item?.name}</Text>
+                  <Text style={styles.descTokenText}>
+                    {item?.currencyGroup}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.priceToken}>
+                <Text style={styles.descTokenPrice}>{latestPrice}</Text>
+                <Text style={styles.descTokenPerformance}>{performance}</Text>
+              </View>
+            </View>
           );
         }}
       />

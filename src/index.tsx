@@ -5,19 +5,19 @@ import { useContext } from "react";
 import { Table, Layout, Header, Badge } from "./Components";
 
 const MainScreen = () => {
-  // const { state, getAllCoin } = useContext(CoinListContext);
+  const { state, getAllCoin } = useContext(CoinListContext);
 
-  // const { data, isError, isLoading } = useCoinData();
+  const { data, isError, isLoading } = useCoinData();
 
-  // useEffect(() => {
-  //   getAllCoin(data);
-  // }, [data]);
+  useEffect(() => {
+    getAllCoin(data);
+  }, [data]);
 
   return (
     <Layout>
       <Header />
       <Badge />
-      {/* <Table data={state} /> */}
+      <Table data={state} />
     </Layout>
   );
 };
