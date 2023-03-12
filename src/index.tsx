@@ -17,7 +17,7 @@ const MainScreen = () => {
     <Layout>
       <Header />
       <Badge />
-      <Table data={state} isLoading={isLoading} refetch={refetch}/>
+      <Table data={state} isLoading={isLoading} refetch={refetch} isError={isError}/>
     </Layout>
   );
 };
