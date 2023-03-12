@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
 
-const Header = () => {
+const Header:React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Market</Text>
