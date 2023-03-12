@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c3459255-3352-48ee-b561-2ea12d5e5699"
+      }
+    },
+    "owner": "samdyra"
   }
 }
