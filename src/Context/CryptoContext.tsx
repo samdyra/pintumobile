@@ -1,10 +1,8 @@
-
 import createDataContext from "./helpers/CreateContext";
-
 
 interface Action {
   type: string;
-  payload: Array<object>
+  payload: Array<object>;
 }
 
 type Dispatch = {
@@ -12,19 +10,20 @@ type Dispatch = {
   payload: Array<object>;
 };
 
-const coinListReducer = (state:Array<object>, action: Action) => {
+const coinListReducer = (state: Array<object>, action: Action) => {
   switch (action.type) {
-  case "get":
-    return action.payload 
+    case "get":
+      return action.payload;
 
-  default:
-    return state;
+    default:
+      return state;
   }
 };
 
-const getAllCoin = (dispatch: (param: Dispatch) => void) => async (payload: Array<object>) => {
-  dispatch({ type: "get", payload });
-};
+const getAllCoin =
+  (dispatch: (param: Dispatch) => void) => async (payload: Array<object>) => {
+    dispatch({ type: "get", payload });
+  };
 
 export const { Context, Provider } = createDataContext(
   coinListReducer,
