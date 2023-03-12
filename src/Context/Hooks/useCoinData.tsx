@@ -8,6 +8,7 @@ type UseCoinData = () => {
   data: Array<object>;
   isLoading: boolean;
   isError: boolean;
+  refetch: () => void;
 }
 
 type CoinData = {
@@ -54,14 +55,18 @@ type Result = {
 const useCoinData: UseCoinData = () => {
   const [ coinData, setCoinData ] = useState<CoinData[]>([]);
   const {
-    data: coinDescription, isLoading: isCoinDescLoading, isError: isCoinDescError 
+    data: coinDescription, isLoading: isCoinDescLoading, isError: isCoinDescError, refetch: refetchCoinDesc, isFetching: isFetchingCoinDesc 
   } = useQuery('coinDesc', fetchDataCoin)
   const {
-    data: coinPrice, isLoading: isCoinPriceLoading, isError: isCoinPriceError 
+    data: coinPrice, isLoading: isCoinPriceLoading, isError: isCoinPriceError, refetch: refetchCoinPrice, isFetching: isFetchingCoinPrice
   } = useQuery('coinPrice', fetchDataPrice)
 
-  const isLoading:boolean = isCoinDescLoading || isCoinPriceLoading;
+  const isLoading:boolean = isFetchingCoinDesc || isFetchingCoinPrice || isCoinDescLoading || isCoinPriceLoading;
   const isError:boolean = isCoinDescError || isCoinPriceError;
+  const refetch = () => {
+    refetchCoinDesc();
+    refetchCoinPrice();
+  }
 
   const fetchCoinData: FetchCoinData = async () => {
     const combinedData = coinDescription?.data?.payload?.map((coin: Coin) => {
@@ -94,7 +99,7 @@ const useCoinData: UseCoinData = () => {
   }, [ coinDescription, coinPrice ]);
 
   return {
-    data: coinData, isLoading, isError 
+    data: coinData, isLoading, isError, refetch 
   };
 
 };

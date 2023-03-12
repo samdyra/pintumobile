@@ -1,9 +1,8 @@
 import React, { memo } from "react";
-import { Text, FlatList, View, Image } from "react-native";
+import { Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
-import { SvgUri } from "react-native-svg";
-import { performanceGetter, groupingFormat } from "../../Helpers/GlobalHelpers";
+import { Shimmer, TokenElement } from "../../Components";
 
 interface Props {
   data: {
@@ -17,9 +16,16 @@ interface Props {
     year: string;
     color: string;
   }[];
+  isLoading: boolean;
 }
 
 const Table: React.FC<Props> = (props: Props) => {
+  const RenderList = props.isLoading ? (
+    <Shimmer width={300} height={200} />
+  ) : (
+    <TokenElement data={props.data} />
+  );
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,39 +35,7 @@ const Table: React.FC<Props> = (props: Props) => {
           <AntDesign name="down" size={18} color="black" />
         </View>
       </View>
-      <FlatList
-        data={props.data}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => {
-          const performance = performanceGetter(item?.day);
-          const latestPrice = `Rp${groupingFormat(
-            parseFloat(item?.latestPrice)
-          )}`;
-          const performanceStyle = parseFloat(item?.day) > 0 ? styles.descTokenPerformance : styles.descTokenPerformanceMinus
-          return (
-            <View style={styles.listContainer}>
-              <View style={styles.descTokenContainer}>
-                <SvgUri
-                  width="38"
-                  height="38"
-                  uri={item?.logo}
-                  color={item?.color}
-                />
-                <View style={styles.descToken}>
-                  <Text style={styles.descTokenTextName}>{item?.name}</Text>
-                  <Text style={styles.descTokenText}>
-                    {item?.currencyGroup}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.priceToken}>
-                <Text style={styles.descTokenPrice}>{latestPrice}</Text>
-                <Text style={performanceStyle}>{performance}</Text>
-              </View>
-            </View>
-          );
-        }}
-      />
+      {RenderList}
     </View>
   );
 };
