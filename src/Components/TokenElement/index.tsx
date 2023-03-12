@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity, Text } from "react-native";
+import { View, FlatList, TouchableOpacity, Text, RefreshControl } from "react-native";
 import { styles } from "./styles";
 import { performanceGetter, groupingFormat } from "../../Helpers/GlobalHelpers";
 import { SvgUri } from "react-native-svg";
@@ -16,6 +16,8 @@ interface Props {
     year: string;
     color: string;
   }[];
+  refetch: () => void;
+  isLoading: boolean;
 }
 
 const TokenElement:React.FC<Props> = (props: Props) => {
@@ -23,6 +25,14 @@ const TokenElement:React.FC<Props> = (props: Props) => {
     <FlatList
       data={props.data}
       keyExtractor={(_, index) => index.toString()}
+      refreshControl={(
+        <RefreshControl
+          colors={[ "#FFFFFF", "#000000" ]}
+          tintColor='blue'
+          onRefresh={props.refetch}
+          refreshing={props.isLoading}
+        />
+      )}
       renderItem={({ item }) => {
         const performance = performanceGetter(item?.day);
         const latestPrice = `Rp${groupingFormat(

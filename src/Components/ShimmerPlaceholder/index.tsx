@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   shimmer: {
     overflow: 'hidden',
     backgroundColor: '#eee',
+    borderRadius: 10
   },
 });
 
@@ -35,8 +36,8 @@ const linear = ANIMATION.interpolate({
 runAnimation();
 
 interface Props {
-    width: number;
-    height: number;
+    width: number | string;
+    height: number | string;
 }
 
 const Shimmer:React.FC<Props> = ({ width, height }) => {

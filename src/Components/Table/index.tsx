@@ -17,15 +17,16 @@ interface Props {
     color: string;
   }[];
   isLoading: boolean;
+  refetch: () => void;
 }
 
 const Table: React.FC<Props> = (props: Props) => {
   const RenderList = props.isLoading ? (
-    <Shimmer width={300} height={200} />
+    <PlaceholderShimmer />
   ) : (
-    <TokenElement data={props.data} />
+    <TokenElement data={props.data} isLoading={props.isLoading} refetch={props.refetch}/>
   );
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -36,6 +37,21 @@ const Table: React.FC<Props> = (props: Props) => {
         </View>
       </View>
       {RenderList}
+    </View>
+  );
+};
+
+const PlaceholderShimmer = () => {
+  return (
+    <View style={styles.shimmer}>
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
+      <Shimmer width="90%" height={50} />
     </View>
   );
 };
