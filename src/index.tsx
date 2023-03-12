@@ -3,8 +3,7 @@ import useCoinData from "./Context/Hooks/useCoinData";
 import { Context as CoinListContext } from "./Context/CryptoContext";
 import { useContext } from "react";
 import { Text, FlatList, View } from "react-native";
-import Table from "./Components/Table";
-import Layout from "./Components/Layout";
+import { Table, Layout, Header } from "./Components";
 
 const MainScreen = () => {
   const { state, getAllCoin } = useContext(CoinListContext);
@@ -17,6 +16,7 @@ const MainScreen = () => {
 
   return (
     <Layout>
+        <Header />
         <Table data={state} />
     </Layout>
   )

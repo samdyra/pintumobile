@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, FlatList, View } from "react-native";
-
+import { Text, FlatList, View, Image } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 interface Props {
   data: {
     currencyGroup: string;
@@ -17,6 +17,13 @@ interface Props {
 const Table: React.FC<Props> = (props: Props) => {
   return (
     <View>
+      <View>
+        <Text>Sort By</Text>
+        <View>
+          <Text>Default</Text>
+          <AntDesign name="caretdown" size={24} color="black" />
+        </View>
+      </View>
       <FlatList
         data={props.data}
         keyExtractor={(_, index) => index.toString()}
