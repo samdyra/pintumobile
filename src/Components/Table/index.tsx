@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, FlatList, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { styles } from "./styles";
 interface Props {
   data: {
     currencyGroup: string;
@@ -16,7 +17,7 @@ interface Props {
 
 const Table: React.FC<Props> = (props: Props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <View>
         <Text>Sort By</Text>
         <View>

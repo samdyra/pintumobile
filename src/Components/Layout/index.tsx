@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { styles } from "./styles";
 
 interface Props {
   children: React.ReactNode;
@@ -10,13 +11,5 @@ const Layout: React.FC<Props> = (props: Props) => {
 
   return <View style={styles.container}>{children}</View>;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    marginTop: 60,
-  },
-});
 
 export default Layout;
