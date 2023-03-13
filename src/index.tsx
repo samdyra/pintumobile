@@ -13,6 +13,8 @@ const MainScreen = () => {
     getAllCoin(data);
   }, [data]);
 
+  if (isError) alert("Something went wrong, please try again later")
+
   return (
     <Layout>
       <Header />
